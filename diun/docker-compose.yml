@@ -1,0 +1,23 @@
+version: "3.5"
+
+services:
+  diun:
+    image: crazymax/diun:latest
+    hostname: Enter-your-hostname-here
+    container_name: diun
+    restart: unless-stopped
+    command: serve
+    volumes:
+      - ./data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TZ=Europe/Oslo
+      - LOG_LEVEL=info
+      - LOG_JSON=false
+      - DIUN_WATCH_WORKERS=20
+      - DIUN_WATCH_SCHEDULE=0 17 * * *
+      - DIUN_PROVIDERS_DOCKER=true
+      - DIUN_PROVIDERS_DOCKER_WATCHBYDEFAULT=true
+      - DIUN_PROVIDERS_DOCKER_WATCHSTOPPED=true
+      - DIUN_NOTIF_GOTIFY_ENDPOINT=http://your-Gotify-server
+      - DIUN_NOTIF_GOTIFY_TOKEN=Your-Gotify-token

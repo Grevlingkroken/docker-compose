@@ -1,0 +1,22 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+
+  db:
+    image: mariadb:10.11.5
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: YourSuperSecurePassw0rd
+    volumes:
+      - ./sqldata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
+
+# Run 'docker exec -it mariadb_guacamole /bin/bash' to enter the container, then run '/usr/bin/mariadb-secure-installation' to tighten security

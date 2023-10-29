@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  ezproxy:
+    image: hyp5r/oclc-ezproxy:latest
+    container_name: oclc-ezproxy
+    network_mode: host
+    hostname: HOSTNAME.TLD
+    restart: unless-stopped
+    environment:
+      - TZ=YOUR_TIMEZONE_HERE
+      - EZPROXY_WSKEY=YOUR_EZPROXY_WSKEY_HERE
+### ================================================================
+### Ports commented out as network_mode is host.
+### Set network_mode to bridge and uncomment the ports lines
+### to use Docker bridge networking. (not recommended)
+### ================================================================
+#   ports:
+#     - 2048:2048
+### ================================================================
+    volumes:
+      - PATH_TO_EZPROXY_CONFIG_FOLDER:/usr/local/ezproxy/config
